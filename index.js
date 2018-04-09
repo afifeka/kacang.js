@@ -9,7 +9,7 @@ bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`);
 
     function randomStatus() {
-          let status = [`Normal Mode!`, `i!invite`, `i!help`,`Remmove Music Commands!`, `${bot.guilds.size} Servers In The Your Party!`]
+          let status = [`Normal Mode!`, `i!invite`, `i!help`,`Tommorow Fixed Ban And Kick!`, `${bot.guilds.size} Servers In The Your Party!`]
           let rstatus = Math.floor(Math.random() * status.length);
           bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
