@@ -7,15 +7,14 @@ const bot = new Discord.Client({disableEveryone: false});
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`);
-  
+
     function randomStatus() {
-          let status = [`Normal Mode!`, `i!invite`, `i!help`, `${bot.guilds.size} Server In The Your Party!`, `Remmove Music Commands!`]
+          let status = [`Normal Mode!`, `i!invite`, `i!help`,`Remmove Music Commands!`, `${bot.guilds.size} Servers In The Your Party!`]
           let rstatus = Math.floor(Math.random() * status.length);
           bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
-     }; setInterval(randomStatus, 15000)
+     }; setInterval(randomStatus, 10000)
    
-    
 });
 
 bot.on("message", async message => {
