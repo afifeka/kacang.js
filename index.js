@@ -75,7 +75,7 @@ bot.on("message", async message => {
         
         message.delete().catch(O_o=>{});
         message.channel.send(":white_check_mark:  | **Succes Banned Players**")
-        modlogchannel.send(banEmbed);
+        message.guild.channels.get(modlogchannel).send(banEmbed);
     
     
         return; 
