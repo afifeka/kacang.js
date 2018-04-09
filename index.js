@@ -12,9 +12,9 @@ bot.on("ready", async () => {
     function randomStatus() {
           let status = [`Normal Mode!`, `i!invite`, `i!help`, `${message.guild.size} Server In The Your Party!`, `Remmove Music Commands!`]
           let rstatus = Math.floor(Math.random() * status.length);
-          bot.user.setActivity(status[rstatus], {type: 'WATCHING'});
+          bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
-     }; setInterval(randomStatus, 10000)
+     }; setInterval(randomStatus, 15000)
    
     
 });
