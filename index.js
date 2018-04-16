@@ -13,7 +13,7 @@ bot.on("ready", async () => {
           let rstatus = Math.floor(Math.random() * status.length);
           bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
-     }; setInterval(randomStatus, 10000)
+     }; setInterval(randomStatus, 15000)
    
 });
 
@@ -27,8 +27,8 @@ bot.on("message", async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
     
-        bot.on("guildCreate", guild => {
-        bot.user.setGame(`Thanks For Add Me :) | Now ${bot.guilds.size} Servers!`);
+    bot.on("guildCreate", guild => {
+      bot.user.setGame(`Thanks For Add Me :) | Now ${bot.guilds.size} Servers!`);
       const channel = guild.channels.find('name', 'general');
       var embed = new Discord.RichEmbed()
       .setDescription("**Hello!**")
@@ -66,7 +66,7 @@ bot.on("message", async message => {
 	.setThumbnail("http://freevector.co/wp-content/uploads/2011/07/44911-user-with-minus-sign.png")
 	.addField(`I have left the guild ${guild.name} owned by ${guildOwner}`, `I have decreased to ${bot.guilds.size} servers with ${bot.users.size} people.`)
 	log.send({ embed: embed })
-});
+     });
 
 bot.on("emojiCreate", emoji => {
 	const log = bot.channels.get("427397720957911042")
@@ -147,6 +147,10 @@ bot.on("channelDelete", channel => {
     if(cmd === `${prefix}username`){
         bot.user.setUsername("SmileBot");
         return;
+    }
+	
+    if (message.content === `<@${bot.user.id}>`) {
+       message.channel.send(`Hi <@${message.author.tag}>, Need Help? Usage s!help`);
     }
     
 
@@ -385,9 +389,9 @@ bot.on("channelDelete", channel => {
         message.channel.send(botmessage);
     }
 
-    if(cmd === `${prefix}ikan`){
-        if(!args[2]) return message.reply("**Usage `!ikan <Question>`**");
-        let replies = ["Yes", "No", "I Dont Know!", "Apa Yang Kamu Bilang?", "Sangat Benar", "Sangat Salah"];
+    if(cmd === `${prefix}ask`){
+        if(!args[2]) return message.reply("**Usage `s!ask apakah <Question>`**");
+        let replies = ["Iya", "Tidak", "Saya Tidak Tahu", "Apa Yang Kamu Bilang?", "Sangat Benar", "Sangat Salah"];
     
         let result = Math.floor((Math.random() * replies.length));
         let question = args.slice(1).join(" ");
