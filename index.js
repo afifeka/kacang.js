@@ -9,7 +9,7 @@ bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`);
 
     function randomStatus() {
-          let status = [`Update Ikan To SmileBot`, `New Prefix Is ${prefix}`, `Type ${prefix}help For Help!`, `On ${bot.guilds.size} Server`]
+          let status = [`Update Ikan To SmileBot`, `Beta v10.1`, `Type s!help For Help!`, `On ${bot.guilds.size} Server`]
           let rstatus = Math.floor(Math.random() * status.length);
           bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
