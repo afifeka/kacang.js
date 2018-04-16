@@ -9,7 +9,7 @@ bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`);
 
     function randomStatus() {
-          let status = [`Normal Mode!`, `i!invite`, `i!help`,`Tommorow Fixed Ban And Kick!`, `${bot.guilds.size} Servers In The Your Party!`]
+          let status = [`Update Ikan To SmileBot`, `New Prefix Is ${prefix}`, `Type ${prefix}help For Help!`, `On ${bot.guilds.size} Server`]
           let rstatus = Math.floor(Math.random() * status.length);
           bot.user.setActivity(status[rstatus], {type: 'Playing'});
   
@@ -26,6 +26,129 @@ bot.on("message", async message => {
     let messageArray = message.content.split(" ");
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
+    
+        bot.on("guildCreate", guild => {
+        bot.user.setGame(`Thanks For Add Me :) | Now ${bot.guilds.size} Servers!`);
+      const channel = guild.channels.find('name', 'general');
+      var embed = new Discord.RichEmbed()
+      .setDescription("**Hello!**")
+      .addField(`Thanks For Adding Me On ${guild.name}`)
+      .addField(`For More Information Use ${prefix}help`)
+      .addField(`My Prefix Is ${prefix}`)
+      .addField("Finding the Command Error ?, Immediately Contant @Afif_#9369 Now!")
+      .addField("Join My Discord [https://discord.gg/dCWA9R]")
+      .setTimestamp()
+      .setThumbnail("https://discordapp.com/assets/a7ca6d4faf1d497b4d75b44a6bb58f91.svg")
+      .setFooter("Thanks For Adding Me On Yours Discord")
+
+      if (!channel) return guild.owner.send({ embed: embed })
+      channel.send({ embed: embed })
+      
+      const guildOwner = guild.owner.user.tag;
+      
+      const log = bot.channels.get(idchannel.idchannels)
+      var embed2 = new Discord.RichEmbed()
+      .setTitle("Joined a server!")
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setThumbnail("http://freevector.co/wp-content/uploads/2009/03/40358-add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png")
+      .addField(`I have joined the server ${guild.name} owned by ${guildOwner}`, `Now bringing ${bot.guilds.size} servers with ${bot.users.size} users in total`)
+      log.send({ embed: embed2 })
+    });
+    
+    bot.on("guildDelete", guild => {
+	const guildOwner = guild.owner.user.tag;
+	const log = bot.channels.get(427397720957911042)
+	var embed = new Discord.RichEmbed()
+	.setTitle("Banned/Kicked/Left a server!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("http://freevector.co/wp-content/uploads/2011/07/44911-user-with-minus-sign.png")
+	.addField(`I have left the guild ${guild.name} owned by ${guildOwner}`, `I have decreased to ${bot.guilds.size} servers with ${bot.users.size} people.`)
+	log.send({ embed: embed })
+});
+
+bot.on("emojiCreate", emoji => {
+	const log = bot.channels.get("427397720957911042")
+	var embed = new Discord.RichEmbed()
+	.setTitle("New Emoji Created")
+	.setThumbnail(`${emoji.url}`)
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField(`${emoji.guild.name} has created a new emoji`, `${emoji}`)
+		log.send({ embed: embed })
+});
+
+bot.on("emojiUpdate", emoji => {
+	const log = bot.channels.get("427397720957911042")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Updated Emoji")
+	.setThumbnail(`${emoji.url}`)
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField(`${emoji.guild.name} has updated a new emoji`, `${emoji}`)
+		log.send({ embed: embed })
+});
+
+bot.on("messageDelete", message => {
+	const log = bot.channels.get("427397720957911042")
+    const guildOwner = message.guild.owner.user.tag;
+
+	if(message.embeds.length == 1) {
+	 var embed2 = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("https://images.homedepot-static.com/productImages/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d/svn/rubbermaid-commercial-products-plastic-trash-cans-fg2643-60-gra-64_1000.jpg")
+	.addField("Guild Owner", guildOwner)
+	.addField("Guild Name", message.guild.name)
+	.addField("Message Author", message.author.tag)
+	.addField("Message Deleted", "Message was an **Embed**")
+	log.send({ embed: embed2 })
+	}
+
+	var embed = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("https://images.homedepot-static.com/productImages/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d/svn/rubbermaid-commercial-products-plastic-trash-cans-fg2643-60-gra-64_1000.jpg")
+	.addField("Guild Owner", guildOwner)
+	.addField("Guild Name", message.guild.name)
+	.addField("Message Author", message.author.tag)
+	.addField("Message Deleted", `It is ***${message.content}***`)
+	log.send({ embed: embed })
+});
+
+bot.on("channelCreate", channel => {
+	
+	if (channel.type == 'dm') return;
+	const log = bot.channels.get("427397720957911042")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Created!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField(`Info on ${channel.name}:`, `It was created in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+bot.on("channelDelete", channel => {
+	const log = bot.channels.get("427397720957911042")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Deleted!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail(`${channel.guild.iconURL}`)
+	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+    
+
+    if(cmd === `${prefix}username`){
+        bot.user.setUsername("SmileBot");
+        return;
+    }
+    
 
     if(cmd === `${prefix}kick`){
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
