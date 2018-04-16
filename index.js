@@ -67,13 +67,14 @@ bot.on("message", async message => {
     }
     
    if (message.content === `<@${bot.user.id}>`) {
-       message.channel.send(`Hi <@${message.author.tag}>, Need Help? Usage s!help`);
+       message.channel.send(`Hi <@${message.author.id}>, Need Help? Usage s!help`);
    }
     
    
    if (message.content === `Hai`) {
-       message.channel.send(`Hai Juga <@${message.author.tag}>, Jangan Lupa Baca Rules Yaa! `);
+       message.channel.send(`Hai Juga <@${message.author.id}>, Jangan Lupa Baca Rules Yaa! `);
    }
+   
 
 
     if(cmd === `${prefix}kick`){
