@@ -141,18 +141,17 @@ bot.on("channelDelete", channel => {
 	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
 	log.send({ embed: embed })
 });
-
-    
-
+	
+    if (message.content === `<@${bot.user.id}>`) {
+       message.channel.send(`Hi <@${message.author.id}>, Need Help? Usage s!help`);
+    }
+	
     if(cmd === `${prefix}username`){
         bot.user.setUsername("SmileBot");
         return;
     }
-	
-    if (message.content === `<@${bot.user.id}>`) {
-       message.channel.send(`Hi <@${message.author.tag}>, Need Help? Usage s!help`);
-    }
     
+
 
     if(cmd === `${prefix}kick`){
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
