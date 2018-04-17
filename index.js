@@ -17,6 +17,73 @@ bot.on("ready", async () => {
    
 });
 
+bot.on("guildMemberAdd", member => {
+    const log = bot.channels.get("435341810248712192")
+    log.send(`${member} Joined The Servers!`)
+    
+});
+
+bot.on("guildMemberRemove", member => {
+
+    const log = bot.channels.get("435341810248712192")
+    log.send(`${member} Left The Server!`)
+});
+
+bot.on("messageDelete", message => {
+	const log = bot.channels.get("435341810248712192")
+    const guildOwner = message.guild.owner.user.tag;
+
+	if(message.embeds.length == 1) {
+	 var embed2 = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("https://discordapp.com/assets/0d6fbd1bceb7a00e24106fcf331cd9f4.svg")
+	.addField("Guild Owner", guildOwner)
+	.addField("Guild Name", message.guild.name)
+	.addField("Message Author", message.author.tag)
+	.addField("Message Deleted", "Message was an **Embed**")
+	log.send({ embed: embed2 })
+	}
+
+	var embed = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("https://discordapp.com/assets/0d6fbd1bceb7a00e24106fcf331cd9f4.svg")
+	.addField("Guild Owner", guildOwner)
+	.addField("Guild Name", message.guild.name)
+	.addField("Message Author", message.author.tag)
+	.addField("Message Deleted", `It is ***${message.content}***`)
+	log.send({ embed: embed })
+});
+
+bot.on("channelCreate", channel => {
+	
+	if (channel.type == 'dm') return;
+	const log = bot.channels.get("435341810248712192")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Created!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField(`Info on ${channel.name}:`, `It was created in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+bot.on("channelDelete", channel => {
+	const log = bot.channels.get("435341810248712192")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Deleted!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail(`${channel.guild.iconURL}`)
+	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+setTimeout(process.exit, 1000 * 60 * 60 * 168);
+
+
 bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
@@ -27,41 +94,8 @@ bot.on("message", async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
     
-   bot.on("guildCreate", guild => {
-        bot.user.setGame(`Thanks For Add Me :) | Now ${bot.guilds.size} Servers!`);
-        const channel = guild.channels.find('name', 'general');
-        var embed = new Discord.RichEmbed()
-        .setDescription("**Hello!**")
-        .addField(`Thanks For Adding Me On ${guild.name}`)
-        .addField(`For More Information Use ${prefix}help`)
-        .addField(`My Prefix Is ${prefix}`)
-        .addField("Finding the Command Error ?, Immediately Contant @Afif_#9369 Now!")
-        .addField("Join My Discord [https://discord.gg/dCWA9R]")
-        .setTimestamp()
-        .setThumbnail("https://discordapp.com/assets/a7ca6d4faf1d497b4d75b44a6bb58f91.svg")
-        .setFooter("Thanks For Adding Me On Yours Discord")
-        setTimeout(process.exit, 1000 * 60 * 60 * 168);
 
-  
-        if (!channel) return guild.owner.send({ embed: embed })
-        channel.send({ embed: embed })
-        
-        const guildOwner = guild.owner.user.tag;
-        
-        const log = bot.channels.get(idchannel.idchannels)
-        var embed2 = new Discord.RichEmbed()
-        .setTitle("Joined a server!")
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setTimeout(process.exit, 1000 * 60 * 60 * 168)
-        .setThumbnail("http://freevector.co/wp-content/uploads/2009/03/40358-add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png")
-        .addField(`I have joined the server ${guild.name} owned by ${guildOwner}`, `Now bringing ${bot.guilds.size} servers with ${bot.users.size} users in total`)
-        log.send({ embed: embed2 })
-    });
-
-    
-
-    if(cmd === `${prefix}username`){
+   if(cmd === `${prefix}username`){
         bot.user.setUsername("SmileBot");
         return;
     }
@@ -105,16 +139,16 @@ bot.on("message", async message => {
 
     if(cmd === `${prefix}ban`){
         let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-        if(!bUser) return message.channel.send(":warning: **| Please Tag Player To Be Banned!**");
+        if(!bUser) return message.channel.send(":warning: **| Mohon, Tag Player Yang Ingin Anda Banned!**")
         let bReason = args.join(" ").slice(22);
-        if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send("No can do pal!");
-        if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":negative_squared_cross_mark: **| Failed To Banned This Person!**");
+        if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send(":x: Anda Tidak Ada Permission Untuk Command Ini!");
+        if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":negative_squared_cross_mark: **| Gagal Banned Player Tersebut!**")
     
         let banEmbed = new Discord.RichEmbed()
         .setDescription("**BANNED**")
         .setColor("#f80a0a")
         .addField(":bust_in_silhouette: | Player Banned", `**${bUser} | ID ${bUser.id}**`)
-        .addField(":bust_in_silhouette: | Banned By", `**<@${message.author.id}> | ID ${message.author.id}**`)
+        .addField(":bust_in_silhouette: | Banned Oleh", `**<@${message.author.id}> | ID ${message.author.id}**`)
         .addField(":no_entry: | Reason", bReason);
     
     
@@ -124,7 +158,7 @@ bot.on("message", async message => {
         message.guild.member(bUser).ban(bReason);
         
         message.delete().catch(O_o=>{});
-        message.channel.send(":white_check_mark:  | **Succes Banned Players**")
+        message.channel.send(":white_check_mark:  | **Sukses Banned Player**")
         message.guild.channels.get(modlogchannel).send(banEmbed);
     
     
@@ -135,20 +169,20 @@ bot.on("message", async message => {
     if(cmd === `${prefix}help`){
         let helpembed = new Discord.RichEmbed()
         .setColor("#15f153")
-        .setDescription("**Prefix : `i!`**")
+        .setDescription("**Prefix : `s!`**")
         .addField(":lock: Moderators Command!", "| `i!ban [Player] [Reason]` | `i!kick [Player] [Reason]` | `i!tempmute [Player] [Time]` |\n| `i!say [say]` | `i!purge [Number]` | `i!news [news]` |\n| `i!warn [*Comming Soon*]` | `i!addrole [Player] [Role Name]` | `i!removerole help` | `i!createrole [Role Name]` |")
         .addField(":earth_asia: General Command", "| `i!ping` |\n| `i!afk [Reason]` | `i!help` | `i!ikan [question]` |\n| `i!userinfo [User]` | `!stats` | `!weather [Location]` |\n| `i!invite` |")
         .setFooter("Beta v0.2 | Discord.js");
         message.delete().catch(O_o=>{});
-        message.channel.send(":mailbox_with_mail: **Sending Help To Your DM!**")
-        return message.author.send(helpembed);           
+        message.channel.send(":mailbox_with_mail: **Mohon Cek Di DM**")
+        return message.author.send(helpembed);
     
     }
 
     if(cmd === `${prefix}tempmute`){
         let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-        if(!tomute) return message.reply(":bust_in_silhouette: | No Player Wants You Mute!");
-        if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply(":negative_squared_cross_mark: | Cant Mute Them!");
+        if(!tomute) return message.reply(":bust_in_silhouette: | Mohon, Tag Player Yang Ingin Anda Mute!")
+        if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply(":negative_squared_cross_mark: | Tidak Bisa Mute Player Tersebut!")
         let muterole = message.guild.roles.find(`name`, "muted");
         //start of create role
         if(!muterole){
@@ -170,7 +204,7 @@ bot.on("message", async message => {
         }
         //end of create role
         let mutetime = args[1];
-        if(!mutetime) return message.reply("You didn't specify a time!");
+        if(!mutetime) return message.reply("Berapa Lama Anda Ingin Mute Player?")
       
         await(tomute.addRole(muterole.id));
         message.reply(`:white_check_mark: | <@${tomute.id}> Has Been Muted For ${ms(ms(mutetime))}`);
