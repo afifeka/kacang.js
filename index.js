@@ -17,18 +17,66 @@ bot.on("ready", async () => {
    
 });
 
-bot.on("guildMemberAdd", member => {
-    const log = bot.channels.get("435341810248712192")
-    log.send(`Welcome, ${member} Enjoy The Server!`)
+bot.on("channelCreate", channel => {
+	
+	if (channel.type == 'dm') return;
+	const log = bot.channels.get("373656598645702658")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Created!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField(`Info on ${channel.name}:`, `It was created in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+bot.on("channelDelete", channel => {
+	const log = bot.channels.get("373656619281678346")
+	var embed = new Discord.RichEmbed()
+	.setTitle("Channel Deleted!")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail(`${channel.guild.iconURL}`)
+	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
+	log.send({ embed: embed })
+});
+
+
+bot.on("message", async message => {
+    if(message.author.bot) return;
     
-});
-
-bot.on("guildMemberRemove", member => {
-
-    const log = bot.channels.get("435341810248712192")
-    log.send(`GoodBye, ${member} See You Later`)
-});
-
+     if(message.channel.type === "dm") {
+        var embed = new Discord.RichEmbed()
+        .setTitle("ERROR!")
+        .setColor("RANDOM")
+        .setThumbnail(`${message.author.displayAvatarURL}`)
+        .setTimestamp()
+        .addField("ERROR!", "I currently don't work in DMs")
+         message.channel.send({ embed: embed })
+         return;
+}
+    
+bot.on("message", message => {
+	if (message.content.startsWith("pr!channel")) {
+		    var embed = new Discord.RichEmbed()
+    .setTitle("<:added:394910274177597491> Added Channel! <:added:394910274177597491>")
+    .setColor("#3399ff")
+    .setTimestamp()
+    .setThumbnail(message.guild.iconURL)
+    .addField("A new channel has been __Created__ in **GUILD_NAME**", `It has been created on***${require('dateformat')(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT, Z")}***`)
+    .addField("It was created by **CHANNEL_AUTHOR**", `We now have __**${bot.channels.size}**__ channels!`)
+    message.channel.send({ embed: embed });
+}
+    
+if (message.content.startsWith("pr!delete")) {
+	var embed = new Discord.RichEmbed()
+	.setTitle("<:removed:394913338888290307> Deleted Message! <:removed:394913338888290307>")
+	.setColor("#ff4040")
+	.setTimestamp()
+	.setThumbnail(message.author.displayAvatarURL)
+	.addField("A message has been __Deleted__ by __**MESSAGE_AUTHOR**__", `It has been deleted in ***GUILD_NAME***`)
+	.addField(`It was deleted on __${require('dateformat')(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT, Z")}__`, "The Deleted message's server owner is **GUILD_OWNER**")
+	message.channel.send({ embed: embed })
+}
 
 bot.on("message", async message => {
     if(message.author.bot) return;
