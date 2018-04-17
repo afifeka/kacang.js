@@ -62,14 +62,7 @@ bot.on("message", async message => {
    if (message.content === `Hai`) {
        message.channel.send(`Hai Juga <@${message.author.id}>, Jangan Lupa Baca Rules Yaa! `);
    }
-   
-   if (message.content === `Test`) {
-       let args3 = args.join(" ").slice(22);
-       message.content.send(`https://discord.gg/${args3}`)
-       message.delete().catch(O_o=>{});
-       message.channel.send(":x:  | **Advertise Is Not Allowed!**")
-   }
-
+  
 
     if(cmd === `${prefix}kick`){
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
