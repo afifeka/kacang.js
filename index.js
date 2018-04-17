@@ -19,22 +19,14 @@ bot.on("ready", async () => {
 
 bot.on("guildMemberAdd", member => {
     const log = bot.channels.get("435341810248712192")
-    let embed16 = new Discord.RichEmbed()
-    .setTittle("**Member Remove**")
-    .addField(`${member} Has Joined The Server!`)
-    .setFooter("This Command In Developent!")
-    log.send({ embed: embed16 })
+    log.send(`Welcome, ${member} Enjoy The Server!`)
     
 });
 
 bot.on("guildMemberRemove", member => {
 
     const log = bot.channels.get("435341810248712192")
-    let embed10 = new Discord.RichEmbed()
-    .setTittle("**Member Remove**")
-    .addField(`${member} Has Leave The Server!`)
-    .setFooter("This Command In Developent!")
-    log.send({ embed: embed10 })
+    log.send(`GoodBye, ${member} See You Later`)
 });
 
 
