@@ -19,69 +19,23 @@ bot.on("ready", async () => {
 
 bot.on("guildMemberAdd", member => {
     const log = bot.channels.get("435341810248712192")
-    log.send(`${member} Joined The Servers!`)
+    let embed16 = new Discord.RichEmbed()
+    .setTittle("**Member Remove**")
+    .addField(`${member} Has Joined The Server!`)
+    .setFooter("This Command In Developent!")
+    log.send({ embed: embed16 })
     
 });
 
 bot.on("guildMemberRemove", member => {
 
     const log = bot.channels.get("435341810248712192")
-    log.send(`${member} Left The Server!`)
+    let embed10 = new Discord.RichEmbed()
+    .setTittle("**Member Remove**")
+    .addField(`${member} Has Leave The Server!`)
+    .setFooter("This Command In Developent!")
+    log.send({ embed: embed10 })
 });
-
-bot.on("messageDelete", message => {
-	const log = bot.channels.get("435341810248712192")
-    const guildOwner = message.guild.owner.user.tag;
-
-	if(message.embeds.length == 1) {
-	 var embed2 = new Discord.RichEmbed()
-	.setTitle("Message Deleted")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.setThumbnail("https://discordapp.com/assets/0d6fbd1bceb7a00e24106fcf331cd9f4.svg")
-	.addField("Guild Owner", guildOwner)
-	.addField("Guild Name", message.guild.name)
-	.addField("Message Author", message.author.tag)
-	.addField("Message Deleted", "Message was an **Embed**")
-	log.send({ embed: embed2 })
-	}
-
-	var embed = new Discord.RichEmbed()
-	.setTitle("Message Deleted")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.setThumbnail("https://discordapp.com/assets/0d6fbd1bceb7a00e24106fcf331cd9f4.svg")
-	.addField("Guild Owner", guildOwner)
-	.addField("Guild Name", message.guild.name)
-	.addField("Message Author", message.author.tag)
-	.addField("Message Deleted", `It is ***${message.content}***`)
-	log.send({ embed: embed })
-});
-
-bot.on("channelCreate", channel => {
-	
-	if (channel.type == 'dm') return;
-	const log = bot.channels.get("435341810248712192")
-	var embed = new Discord.RichEmbed()
-	.setTitle("Channel Created!")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.addField(`Info on ${channel.name}:`, `It was created in ${channel.guild.name}`)
-	log.send({ embed: embed })
-});
-
-bot.on("channelDelete", channel => {
-	const log = bot.channels.get("435341810248712192")
-	var embed = new Discord.RichEmbed()
-	.setTitle("Channel Deleted!")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.setThumbnail(`${channel.guild.iconURL}`)
-	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
-	log.send({ embed: embed })
-});
-
-setTimeout(process.exit, 1000 * 60 * 60 * 168);
 
 
 bot.on("message", async message => {
@@ -109,6 +63,12 @@ bot.on("message", async message => {
        message.channel.send(`Hai Juga <@${message.author.id}>, Jangan Lupa Baca Rules Yaa! `);
    }
    
+   if (message.content === `Test`) {
+       let args3 = args.join(" ").slice(22);
+       message.content.send(`https://discord.gg/${args3}`)
+       message.delete().catch(O_o=>{});
+       message.channel.send(":x:  | **Advertise Is Not Allowed!**")
+   }
 
 
     if(cmd === `${prefix}kick`){
