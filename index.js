@@ -20,7 +20,7 @@ bot.on("ready", async () => {
 bot.on("channelCreate", channel => {
 	
 	if (channel.type == 'dm') return;
-	const log = bot.channels.get("373656598645702658")
+	const log = bot.channels.get("435341810248712192")
 	var embed = new Discord.RichEmbed()
 	.setTitle("Channel Created!")
 	.setColor("RANDOM")
@@ -30,7 +30,7 @@ bot.on("channelCreate", channel => {
 });
 
 bot.on("channelDelete", channel => {
-	const log = bot.channels.get("373656619281678346")
+	const log = bot.channels.get("435341810248712192")
 	var embed = new Discord.RichEmbed()
 	.setTitle("Channel Deleted!")
 	.setColor("RANDOM")
@@ -38,6 +38,21 @@ bot.on("channelDelete", channel => {
 	.setThumbnail(`${channel.guild.iconURL}`)
 	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
 	log.send({ embed: embed })
+});
+
+
+bot.on("guildCreate", guild => {
+  
+  const guildOwner = guild.owner.user.tag;
+  
+  const log = bot.channels.get("435341810248712192")
+  var embed2 = new Discord.RichEmbed()
+  .setTitle("Joined a server!")
+  .setColor("RANDOM")
+  .setTimestamp()
+  .setThumbnail("http://freevector.co/wp-content/uploads/2009/03/40358-add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png")
+  .addField(`I have joined the server ${guild.name} owned by ${guildOwner}`, `Now bringing ${bot.guilds.size} servers with ${bot.users.size} users in total`)
+  log.send({ embed: embed2 })
 });
 
 bot.on("message", async message => {
