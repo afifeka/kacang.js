@@ -17,6 +17,34 @@ bot.on("ready", async () => {
    
 });
 
+bot.on('guildMemberAdd' => member {
+   const log = bot.channels.get("435341810248712192")
+
+   let embed = new Discord.RichEmbed()
+   .setTittle("Member Joined")
+   .addField(`Users`, `${member} Joined The Server`)
+   .addField(`Servers`, `${member.guild.name}`)
+   .setFooter("Command Public In Developent!");
+
+   log.send(embed);
+
+});
+
+bot.on('guildMemberRemove' => member {
+   const log = bot.channels.get("435341810248712192")
+
+   let embed = new Discord.RichEmbed()
+   .setTittle("Member Remove")
+   .addField(`Users`, `${member} Leave The Server`)
+   .addField(`Servers`, `${member.guild.name}`)
+   .setFooter("Command Public In Developent!");
+
+   log.send(embed);
+
+});
+ 
+ 
+
 bot.on("channelCreate", channel => {
 	
 	if (channel.type == 'dm') return;
