@@ -17,7 +17,7 @@ bot.on("ready", async () => {
    
 });
 
-bot.on('guildMemberAdd' => member {
+bot.on('guildMemberAdd', member => {
    const log = bot.channels.get("435341810248712192")
 
    let embed = new Discord.RichEmbed()
@@ -30,7 +30,7 @@ bot.on('guildMemberAdd' => member {
 
 });
 
-bot.on('guildMemberRemove' => member {
+bot.on("guildMemberRemove", member => {
    const log = bot.channels.get("435341810248712192")
 
    let embed = new Discord.RichEmbed()
@@ -53,7 +53,7 @@ bot.on("channelCreate", channel => {
 	.setTitle("Channel Created!")
 	.setColor("RANDOM")
 	.setTimestamp()
-	.addField(`Info on ${channel.name}:`, `It was created in ${channel.guild.name}`)
+	.addField(`Channel Name : ${channel.name}`, `Created In ${channel.guild.name}`)
 	log.send({ embed: embed })
 });
 
@@ -64,7 +64,7 @@ bot.on("channelDelete", channel => {
 	.setColor("RANDOM")
 	.setTimestamp()
 	.setThumbnail(`${channel.guild.iconURL}`)
-	.addField(`Info on ${channel.name}:`, `It was deleted in ${channel.guild.name}`)
+	.addField(`Channel Name : ${channel.name}:`, `Deleted In ${channel.guild.name}`)
 	log.send({ embed: embed })
 });
 
