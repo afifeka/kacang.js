@@ -41,48 +41,7 @@ bot.on("channelDelete", channel => {
 });
 
 
-bot.on("messageDelete", message => {
-	const log = bot.channels.get("373584277633499137")
-        const guildOwner = message.guild.owner.user.tag;
 
-	if(message.embeds.length == 1) {
-	 var embed2 = new Discord.RichEmbed()
-	.setTitle("Message Deleted")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.addField("Server Owner", guildOwner)
-	.addField("Server Name", message.guild.name)
-	.addField("Message User", message.author.tag)
-	.addField("Message Deleted", "Message Was An **Embed**")
-	log.send({ embed: embed2 })
-	}
-        var embed = new Discord.RichEmbed()
-	.setTitle("Message Deleted")
-	.setColor("RANDOM")
-	.setTimestamp()
-	.setThumbnail("https://images.homedepot-static.com/productImages/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d/svn/rubbermaid-commercial-products-plastic-trash-cans-fg2643-60-gra-64_1000.jpg")
-	.addField("Guild Owner", guildOwner)
-	.addField("Guild Name", message.guild.name)
-	.addField("Message Author", message.author.tag)
-	.addField("Message Deleted", `It is ***${message.content}***`)
-	log.send({ embed: embed })
-});
-
-	
-	
-bot.on("guildCreate", guild => {
-  
-  const guildOwner = guild.owner.user.tag;
-  
-  const log = bot.channels.get("435341810248712192")
-  var embed2 = new Discord.RichEmbed()
-  .setTitle("Joined a server!")
-  .setColor("RANDOM")
-  .setTimestamp()
-  .setThumbnail("http://freevector.co/wp-content/uploads/2009/03/40358-add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png")
-  .addField(`I have joined the server ${guild.name} owned by ${guildOwner}`, `Now bringing ${bot.guilds.size} servers with ${bot.users.size} users in total`)
-  log.send({ embed: embed2 })
-});
 
 bot.on("message", async message => {
     if(message.author.bot) return;
