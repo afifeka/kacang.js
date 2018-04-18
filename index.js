@@ -148,6 +148,27 @@ bot.on("message", async message => {
         return message.author.send(helpembed);
     
     }
+	
+    if (cmd === `${prefix}idea`){
+        let ideaMessage = args.join(" ").slice(1);
+        let idea = message.guild.member(message.guild.members.get(args[0]));
+
+        let Ideas = new Discord.RichEmbed()
+        .setDescription("**MEMBER IDEAS**")
+        .addField("***IDEA***", `${ideaMessage}`)
+        .addField("***IDEA BY***", `${idea}`)
+        .setFooter("Ideas Command In Development")
+
+        let ideachannel = message.guild.channels.find(`name`, "member-idea");
+        if(!ideachannel) return message.channel.send("No Named Channel `member-idea`.");
+
+        message.delete().catch(O_o=>{});
+        message.channel.send("**Idea Has Ben Shared!**")
+        ideachannel.send(Ideas);
+
+        return;
+    }
+
 
     if(cmd === `${prefix}tempmute`){
         let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
