@@ -18,32 +18,18 @@ bot.on("ready", async () => {
 });
 
 bot.on('guildMemberAdd', member => {
+       
    const log = bot.channels.get("435341810248712192")
-
-   let embed = new Discord.RichEmbed()
-   .setTittle("Member Joined")
-   .addField(`Users`, `${member} Joined The Server`)
-   .addField(`Servers`, `${member.guild.name}`)
-   .setFooter("Command Public In Developent!");
-
-   log.send(embed);
+   log.send(`Welcome, ${member} In Server **[ Gamerz Compation ]**, Enjoy The Server And Dont Forget To Read The Rules! `);
 
 });
-
-bot.on("guildMemberRemove", member => {
+bot.on('guildMemberRemove', member => {
+       
    const log = bot.channels.get("435341810248712192")
 
-   let embed = new Discord.RichEmbed()
-   .setTittle("Member Remove")
-   .addField(`Users`, `${member} Leave The Server`)
-   .addField(`Servers`, `${member.guild.name}`)
-   .setFooter("Command Public In Developent!");
-
-   log.send(embed);
+   log.send(`GoodBye, ${member} In Server **[ Gamerz Compation ]**, See You Later!  `);
 
 });
- 
- 
 
 bot.on("channelCreate", channel => {
 	
