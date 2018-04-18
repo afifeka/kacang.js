@@ -41,6 +41,35 @@ bot.on("channelDelete", channel => {
 });
 
 
+bot.on("messageDelete", message => {
+	const log = bot.channels.get("373584277633499137")
+        const guildOwner = message.guild.owner.user.tag;
+
+	if(message.embeds.length == 1) {
+	 var embed2 = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.addField("Server Owner", guildOwner)
+	.addField("Server Name", message.guild.name)
+	.addField("Message User", message.author.tag)
+	.addField("Message Deleted", "Message Was An **Embed**")
+	log.send({ embed: embed2 })
+	}
+        var embed = new Discord.RichEmbed()
+	.setTitle("Message Deleted")
+	.setColor("RANDOM")
+	.setTimestamp()
+	.setThumbnail("https://images.homedepot-static.com/productImages/d97bfbf9-cf37-40d2-8fe2-6be3958eba6d/svn/rubbermaid-commercial-products-plastic-trash-cans-fg2643-60-gra-64_1000.jpg")
+	.addField("Guild Owner", guildOwner)
+	.addField("Guild Name", message.guild.name)
+	.addField("Message Author", message.author.tag)
+	.addField("Message Deleted", `It is ***${message.content}***`)
+	log.send({ embed: embed })
+});
+
+	
+	
 bot.on("guildCreate", guild => {
   
   const guildOwner = guild.owner.user.tag;
@@ -84,7 +113,7 @@ bot.on("message", async message => {
     if(cmd === `${prefix}kick`){
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if(!kUser) return message.channel.send(":warning: **| Please Tag Player To Be Kicked!**");
-        let kReason = args.join(" ").slice(22);
+        let kReason = args.join(" ").slice(1);
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No can do pal!");
         if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":negative_squared_cross_mark: **| Failed To Kicked This Person!**");
       
