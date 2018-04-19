@@ -3,6 +3,9 @@ const Discord = require("discord.js");
 const cpu = process.cpuUsage().system / 1024 / 1024;
 const used = process.memoryUsage().heapUsed / 1024 / 1024;
 const db = require("quick.db");
+const figlet = require('figlet');
+const randomPuppy = require('random-puppy');
+const request = require("request");
 
 const bot = new Discord.Client({disableEveryone: false});
 
@@ -95,6 +98,18 @@ bot.on("message", async message => {
     })
 
   }
+  if(cmd === `${prefix}ascii`){
+      const text = args.join(" ");
+    figlet(text, function(err, data) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
+    }
+    if (data.length > 2000) return message.channel.send("That is WAYYYY to long! You may wanna shorten up the word!")
+    message.channel.send(`\`\`\`\n${data}\n\`\`\``)
+});
+}
 
   if(cmd === `@{prefix}setchannel`){
 
@@ -113,6 +128,45 @@ bot.on("message", async message => {
     })
 
   }
+
+  if(cmd === `${prefix}cat`){
+      var requesting = request.get('http://thecatapi.com/api/images/get.php/jpg.php?type=jpg', function(err, res, body) {
+        if (err) {
+            console.log("An error was found while pushing a cat image so I've moved to trying to send a PNG image!");
+            var requesting2 = request.get('http://thecatapi.com/api/images/get.php/png.php?type=png', function(err, res, body) {
+                if (err) {
+                    var requesting3 = request.get('http://thecatapi.com/api/images/get.php/png.php?type=png', function(err, res, body) {
+                        if (err) {
+                            return message.channel.send("I couldn't find any Cat pictures or GIFs sorry!");
+                        }
+                        message.channel.send({file: requesting3.uri.href})
+                    })
+                }
+                message.channel.send({file: requesting2.uri.href})
+            })
+        }
+        message.channel.send({file: requesting.uri.href})
+    })
+    
+    
+    
+}
+   if(cmd === `${prefix}dog`){
+      randomPuppy()
+    .then(url => {
+        if (url.includes(".jpg" || ".png" || ".svg")) {
+             var embed = new Discord.RichEmbed()
+               .setTitle("URL")
+               .setURL(url)
+               .setColor("#0000FF")
+               .setImage(url)
+              message.channel.send({ embed: embed })
+             return; 
+        } else {
+            return message.channel.send("Not the correct format came through. So I couldn't send you a picture of a dog");
+        }
+    
+})};
 	
   if(cmd === `${prefix}setwelcome`){
 
@@ -198,8 +252,8 @@ bot.on("message", async message => {
         let helpembed = new Discord.RichEmbed()
         .setColor("#15f153")
         .setDescription("**Prefix : `s!`**")
-        .addField(":lock: Moderators Command!", "| `i!ban [Player] [Reason]` | `i!kick [Player] [Reason]` | `i!tempmute [Player] [Time]` |\n| `i!say [say]` | `i!purge [Number]` | `i!news [news]` |\n| `i!warn [*Comming Soon*]` | `i!addrole [Player] [Role Name]` | `i!removerole help` | `i!createrole [Role Name]` |")
-        .addField(":earth_asia: General Command", "| `i!ping` |\n| `i!afk [Reason]` | `i!help` | `i!ikan [question]` |\n| `i!userinfo [User]` | `!stats` | `!weather [Location]` |\n| `i!invite` |")
+        .addField(":lock: Moderators Command!", "| `s!ban [Player] [Reason]` | `s!kick [Player] [Reason]` | `s!tempmute [Player] [Time]` |\n| `s!say [say]` | `s!purge [Number]` | `s!news [news]` |\n| `s!warn [*Comming Soon*]` | `i!addrole [Player] [Role Name]` | `i!removerole help` | `i!createrole [Role Name]` |")
+        .addField(":earth_asia: General Command", "| `s!ping` |\n| `s!afk [Reason]` | `s!help` | `s!ask [question]` |\n| `s!userinfo [User]` | `s!stats` | `s!weather [Location]` |\n| `s!invite` | `s!ascii [text]`| `s!cat | ")
         .setFooter("Beta v0.2 | Discord.js");
         message.delete().catch(O_o=>{});
         message.channel.send(":mailbox_with_mail: **Mohon Cek Di DM**")
