@@ -25,14 +25,14 @@ bot.on('guildMemberAdd', member => {
        
    const log = bot.channels.get("435341810248712192")
  
-   log.send(`Welcome, **${member.user.username}** In Server **${member.guild.name}** With Owner **${member.guild.name}**!`);
+   log.send(`Welcome, **${member.user.username}** In Server **${member.guild.name}** With Owner **${member.guild.owner.username}**!`);
    
 });
 bot.on('guildMemberRemove', member => {
        
    const log = bot.channels.get("435341810248712192")
 
-   log.send(`GoodBye, ${member.user.username}> In Server **${member.guild.name}** With Owner **${member.guild.owner}**!`);
+   log.send(`GoodBye, ${member.user.username}> In Server **${member.guild.name}** With Owner **${member.guild.owner.username}**!`);
 
 });
 
@@ -74,7 +74,7 @@ bot.on("message", async message => {
     
 
    if(cmd === `${prefix}username`){
-        bot.user.setUsername("Guardian");
+        bot.user.setUsername("Light™");
         return;
     }
     
