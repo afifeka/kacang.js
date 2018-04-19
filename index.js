@@ -168,6 +168,29 @@ bot.on("message", async message => {
     
 })};
 	
+   if(cmd === `${prefix}neko`){
+      var requesting = request.get('https://nekos.life/api/v2/img/lewd ', function(err, res, body) {
+        if (err) {
+            console.log("An error was found while pushing a Neko image so I've moved to trying to send a PNG image!");
+            var requesting2 = request.get('https://nekos.life/api/v2/img/lewd', function(err, res, body) {
+                if (err) {
+                    var requesting3 = request.get('https://nekos.life/api/v2/img/lewd', function(err, res, body) {
+                        if (err) {
+                            return message.channel.send("I couldn't find any Neko pictures or GIFs sorry!");
+                        }
+                        message.channel.send({file: requesting3.uri.href})
+                    })
+                }
+                message.channel.send({file: requesting2.uri.href})
+            })
+        }
+        message.channel.send({file: requesting.uri.href})
+    })
+    
+    
+    
+}
+	
   if(cmd === `${prefix}setwelcome`){
 
     // Return Statements
