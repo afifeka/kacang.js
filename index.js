@@ -2,6 +2,7 @@ const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const cpu = process.cpuUsage().system / 1024 / 1024;
 const used = process.memoryUsage().heapUsed / 1024 / 1024;
+const db = require("quick.db");
 
 const bot = new Discord.Client({disableEveryone: false});
 
