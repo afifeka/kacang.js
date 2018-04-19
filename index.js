@@ -112,15 +112,6 @@ bot.on("message", async message => {
 });
 }
  
- if(cmd === `${prefix}neko`){
-    let {body} = await superagent
-    .get("aws.random.cat/meow")
-    var catembed = new Discord.RichEmbed()
-    .setTitle('Neko Random Photo!')
-    .setColor("RANDOM")
-    .setImage(body.file)
-    message.channel.send(catembed)
-}
 
 
   if(cmd === `@{prefix}setchannel`){
