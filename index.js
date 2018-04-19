@@ -6,6 +6,7 @@ const db = require("quick.db");
 const figlet = require('figlet');
 const randomPuppy = require('random-puppy');
 const request = require("request");
+const superagent = require("superagent")
 
 const bot = new Discord.Client({disableEveryone: false});
 
