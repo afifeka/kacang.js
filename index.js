@@ -21,14 +21,14 @@ bot.on('guildMemberAdd', member => {
        
    const log = bot.channels.get("435341810248712192")
  
-   log.send(`Welcome, <@${member.author.id}> In Server **${member.guild.name}**, Enjoy The Server And Dont Forget To Read The Rules! `);
+   log.send(`Welcome, <@${member} In Server **${member.guild.name}**, Enjoy The Server And Dont Forget To Read The Rules! `);
    
 });
 bot.on('guildMemberRemove', member => {
        
    const log = bot.channels.get("435341810248712192")
 
-   log.send(`GoodBye, <@${member.author.id}> In Server **${member.guild.name}**, See You Later!  `);
+   log.send(`GoodBye, ${member}> In Server **${member.guild.name}**, See You Later!  `);
 
 });
 
@@ -77,6 +77,24 @@ bot.on("message", async message => {
    if (message.content === `<@${bot.user.id}>`) {
        message.channel.send(`Hi <@${message.author.id}>, Need Help? Usage s!help`);
    }
+
+   if(cmd === `{prefix}setleave`){
+
+    // Return Statements
+    if (!message.member.roles.find('name', 'Owner')) return func.embed(message.channel, '**This command requires the Owner role**', 120000) // This returns if it CANT find the owner role on them. It then uses the function to send to message.channel, and deletes the message after 120000 milliseconds (2minutes)
+    if (!args.join(" ") && args.join(" ").toUpperCase() !== 'NONE') return func.embed(message.channel, '**Please mention a channel**\n > *~setleave message*') // This returns if they don't message a channel, but we also want it to continue running if they want to disable the log
+    // Fetch the new channel they mentioned
+    let newMessage;
+    if (args.join(" ").toUpperCase() === 'NONE') newMessage = ''; // If they wrote the word none, it sets newMessage as empty.
+    else newMessage = args.join(" ").trim(); // If they didn't write none, set what they wrote as the message
+
+    // This will update the .text of the joinMessageDM_guildID object.
+    db.updateText(`leaveMessage_${message.guild.id}`, newMessage).then(i => {
+        func.embed(message.channel, `**Successfully updated welcome text to:**\n > *${args.join(" ").trim()}*`) // Finally, send in chat that they updated the channel.
+    })
+
+  }
+ 
     
    
    if (message.content === `Hai`) {
