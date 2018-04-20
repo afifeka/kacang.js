@@ -26,14 +26,14 @@ bot.on('guildMemberAdd', member => {
        
    const log = bot.channels.get("435341810248712192")
  
-   log.send(`Welcome, **${member.user.username}** In Server **${member.guild.name}** With Owner **${member.guild.owner.username}**!`);
+   log.send(`Welcome, **${member.user.username}** In Server **${member.guild.name}** With Owner **${member.guild.owner.user.username}**!`);
    
 });
 bot.on('guildMemberRemove', member => {
        
    const log = bot.channels.get("435341810248712192")
 
-   log.send(`GoodBye, ${member.user.username}> In Server **${member.guild.name}** With Owner **${member.guild.owner.username}**!`);
+   log.send(`GoodBye, ${member.user.username}> In Server **${member.guild.name}** With Owner **${member.guild.owner.user.username}**!`);
 
 });
 
